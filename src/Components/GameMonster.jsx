@@ -131,9 +131,32 @@ class GameMonster extends React.Component {
     });
   };
 
+  makeMonsterOlder = (age) => {
+    this.setState((state) => {
+      return {
+        monster: {
+          [age]: (state.monster[age] += 1),
+          ...state.monster,
+        },
+        shouldUpdate: true,
+      };
+    });
+  };
+
+  makeMonsterEvolve = (evolve) => {
+    this.setState((state) => {
+      return {
+        monster: {
+          level: (state.monster.level = evolve),
+          ...state.monster,
+        },
+        shouldUpdate: true,
+      };
+    });
+  };
+
   render() {
     const monster = this.state?.monster;
-    console.log(monster);
     const user = this.state?.current_user;
     return (
       <>
@@ -169,6 +192,8 @@ class GameMonster extends React.Component {
             computerUpdateStat={this.computerUpdateStat}
             computerMakePoop={this.computerMakePoop}
             computerMakeSick={this.computerMakeSick}
+            makeMonsterOlder={this.makeMonsterOlder}
+            makeMonsterEvolve={this.makeMonsterEvolve}
           />
         )}
       </>
